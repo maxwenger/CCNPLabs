@@ -1,0 +1,47 @@
+! Run the below command and reload before continuing
+! the rest of the configureation
+sdm prefer dual-ipv4-and-ipv6 default
+!
+!
+
+enable
+configure t
+
+! Must enable routing on the layer 3 switch
+ip routing
+ipv6 unicast-routing
+
+int range f1/0/2 - 5
+shutdown
+no switchport
+
+! Goes to stub network
+int f1/0/2
+ip address 10.2.2.1 255.255.255.0
+ipv6 address 2001::2:1/64
+
+! Goes to totally stubby
+int f1/0/3
+ip address 10.3.3.1 255.255.255.0
+ipv6 address 2001::3:1/64
+
+! Goes to totally stubby
+int f1/0/4
+ip address 10.4.4.1 255.255.255.0
+ipv6 address 2001::4:1/64
+
+! Goes to totally stubby
+int f1/0/5
+ip address 10.5.5.1 255.255.255.0
+ipv6 address 2001::5:1/64
+
+! Must turn off switchport to make it a routing port
+int range f1/0/2 - 5
+no switchport
+ipv6 address FE80::1 link-local
+ipv6 ospf 1 area 0
+no shutdown
+
+router ospf 1
+router-id 1.1.1.1
+network 10.0.0.0 0.0.0.255 area 0

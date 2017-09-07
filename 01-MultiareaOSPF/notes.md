@@ -57,13 +57,20 @@ Area can be stubby or totally stubby *if*:
 
 ### Stub Area
 
-Contains all internal and area routing information, *but not external routing information.*
+A stub area is a special area where there is only one gateway (ABR) out of the area. This can also increese proformence because routers in a stub area are only required to maintain other networks in their area, anything external is summerised by the ABR and sent as a default route. In doing so, the ABR filters all Type 5 LSAs (the network advertisements from outside of the area).
 
-Reduce amount of links in the database by filtering Type 5 LSAs. External LSAs are blocked.
+* No more Type 5 LSAs
+  * Faster because of smaller routing table
+  * Faster because of less traffic on the network
+* ABR summerises other areas and send it as a default route to the stub area routers
 
-To get connection to the outside world, OSPF sends a default route into the stub network.
+#### Configureation notes
 
-**Every router in the area must be configured for stub with the `area # stub` command.**
+Every router in the area must be configured for stub with the `area # stub` command.
+
+#### Questions 
+
+How is the ABR determined?
 
 ### Totally Stubby Area
 
