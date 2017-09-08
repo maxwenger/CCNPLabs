@@ -1,0 +1,28 @@
+enable
+configure t
+hostname TotallyNSSABR
+
+ipv6 unicast-routing
+ip routing
+
+! To backbone
+int g0/0
+    ip address 10.5.5.5 255.255.255.0
+    ipv6 address FE80::2 link-local
+    ipv6 address 2001:5::5/64
+    no shutdown
+    ipv6 ospf 1 area 0
+    ip ospf 1 area 0
+
+! To stub router
+int g0/1
+    ip address 172.16.5.1 255.255.255.0
+    ipv6 address FE80::1 link-local
+    ipv6 address 2001:5:5::1/64
+    no shutdown
+    ipv6 ospf 1 area 5
+    ip ospf 1 area 5
+
+router ospf 1
+    router-id 5.5.5.5
+    area 5 nssa no-summary

@@ -24,4 +24,4 @@ int loopback 4
 
 router ospf 1
     router-id 44.44.44.44
-    area 4 stub
+    area 4 nssa 
