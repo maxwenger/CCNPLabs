@@ -1,0 +1,28 @@
+enable
+configure t
+hostname TotallyStubbyABR
+
+ipv6 unicast-routing
+ip routing
+
+! To backbone
+int g0/0
+    ip address 10.3.3.3 255.255.255.0
+    ipv6 address FE80::2 link-local
+    ipv6 address 2001:3::2/64
+    no shutdown
+    ipv6 ospf 1 area 0
+    ip ospf 1 area 0
+
+! To totally stubby router
+int g0/1
+    ip address 172.16.3.1 255.255.255.0
+    ipv6 address FE80::1 link-local
+    ipv6 address 2001:3:3::1/64
+    no shutdown
+    ipv6 ospf 1 area 3
+    ip ospf 1 area 3
+
+router ospf 1
+    router-id 3.3.3.3
+    area 3 stub no-summary

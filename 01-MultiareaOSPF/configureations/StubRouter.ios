@@ -1,0 +1,27 @@
+enable
+configure t
+hostname StubRouter
+
+ipv6 unicast-routing
+ip routing
+
+! To stub ABR
+int g0/0
+    ip address 172.16.2.2 255.255.255.0
+    ipv6 address FE80::2 link-local
+    ipv6 address 2001:2:2::2/64
+    no shutdown
+    ipv6 ospf 1 area 2
+    ip ospf 1 area 2
+
+int loopback 2
+    ip address 192.168.2.1 255.255.255.255
+    ipv6 address FE80::1 link-local
+    ipv6 address 2001:2:2:2::1/128
+    no shutdown
+    ipv6 ospf 1 area 2
+    ip ospf 1 area 2
+
+router ospf 1
+    router-id 22.22.22.22
+    area 2 stub

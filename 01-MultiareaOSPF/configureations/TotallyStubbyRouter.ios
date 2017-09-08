@@ -1,0 +1,27 @@
+enable
+configure t
+hostname TotallyStubbyRouter
+
+ipv6 unicast-routing
+ip routing
+
+! To stub ABR
+int g0/0
+    ip address 172.16.3.2 255.255.255.0
+    ipv6 address FE80::2 link-local
+    ipv6 address 2001:3:3::2/64
+    no shutdown
+    ipv6 ospf 1 area 3
+    ip ospf 1 area 3
+
+int loopback 3
+    ip address 192.168.3.1 255.255.255.255
+    ipv6 address FE80::1 link-local
+    ipv6 address 2001:3:3:3::1/128
+    no shutdown
+    ipv6 ospf 1 area 3
+    ip ospf 1 area 3
+
+router ospf 1
+    router-id 33.33.33.33
+    area 3 stub no-summary
