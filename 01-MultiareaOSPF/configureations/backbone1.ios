@@ -42,7 +42,10 @@ int range f1/0/2 - 5
     ipv6 address FE80::1 link-local
     no shutdown
     ipv6 ospf 1 area 0
-    ip ospf area 0
+    ip ospf 1 area 0
 
 router ospf 1
+    router-id 1.1.1.1
+    
+ipv6 router ospf 1
     router-id 1.1.1.1

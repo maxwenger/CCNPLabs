@@ -1,3 +1,4 @@
+! Cisco 2811
 enable
 configure t
 hostname StubRouter
@@ -6,7 +7,7 @@ ipv6 unicast-routing
 ip routing
 
 ! To stub ABR
-int g0/0
+int fa0/0
     ip address 172.16.2.2 255.255.255.0
     ipv6 address FE80::2 link-local
     ipv6 address 2001:2:2::2/64

@@ -1,3 +1,4 @@
+! Cisco 2811
 enable
 configure t
 hostname TotallyNSSRouter
@@ -6,7 +7,7 @@ ipv6 unicast-routing
 ip routing
 
 ! To stub ABR
-int g0/0
+int fa0/0
     ip address 172.16.5.2 255.255.255.0
     ipv6 address FE80::2 link-local
     ipv6 address 2001:5:5::2/64
@@ -23,5 +24,9 @@ int loopback 5
     ip ospf 1 area 5
 
 router ospf 1
+    router-id 55.55.55.55
+    area 5 nssa no-summary
+
+ipv6 router ospf 1
     router-id 55.55.55.55
     area 5 nssa no-summary
