@@ -26,3 +26,7 @@ int g0/1
 router ospf 1
     router-id 2.2.2.2
     area 2 stub
+
+ipv6 router ospf 1
+    router-id 2.2.2.2
+    area 2 stub

@@ -27,3 +27,7 @@ int g0/1
 router ospf 1
     router-id 3.3.3.3
     area 3 stub no-summary
+
+ipv6 router ospf 1
+    router-id 3.3.3.3
+    area 3 stub no-summary

@@ -25,3 +25,7 @@ int loopback 3
 router ospf 1
     router-id 33.33.33.33
     area 3 stub no-summary
+
+ipv6 router ospf 1
+    router-id 33.33.33.33
+    area 3 stub no-summary

@@ -26,3 +26,7 @@ int loopback 2
 router ospf 1
     router-id 22.22.22.22
     area 2 stub
+
+ipv6 router ospf 1
+    router-id 22.22.22.22
+    area 2 stub
