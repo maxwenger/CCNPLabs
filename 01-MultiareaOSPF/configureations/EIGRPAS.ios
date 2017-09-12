@@ -1,0 +1,42 @@
+! Run the below command and reload before continuing
+! the rest of the configureation
+sdm prefer dual-ipv4-and-ipv6 default
+!
+!
+
+enable
+configure t
+hostname EIGRPAS
+
+! Must enable routing on the layer 3 switch
+ip routing
+ipv6 unicast-routing
+
+interface lo0
+    shutdown
+    no switchport
+    ip address 192.168.44.1 255.255.255.255
+    ipv6 address FE80::1 link-local
+    ipv6 address 2001:44:44::2/128
+    ip eigrp 1
+    ipv6 eigrp 1
+    no shutdown
+
+interface f1/0/1
+    shutdown
+    no switchport
+    ip address 10.44.44.2 255.255.255.0
+    ipv6 address FE80::2 link-local
+    ipv6 address 2001:44::2/64
+    ip eigrp 1
+    ipv6 eigrp 1
+    no shutdown
+
+router eirp 1
+    eigrp router-id 2.2.2.2
+    network 10.44.44.0 0.0.0.255
+    network 192.168.44.1 0.0.0.0
+    no shutdown
+ipv6 router eirp 1
+    eigrp router-id 2.2.2.2
+    no shutdown    

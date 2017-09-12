@@ -44,8 +44,34 @@ int range f1/0/2 - 5
     ipv6 ospf 1 area 0
     ip ospf 1 area 0
 
+! Interface to external OSPF process
+interface f1/0/6
+    shutdown
+    no switchport
+    ip address 10.11.11.1 255.255.255.0
+    ipv6 address 2001:11::1/64
+    ipv6 address FE80::1 link-local
+    no shutdown
+    ipv6 ospf 1 area 0
+    ip ospf 1 area 0
+
+! Unfortunately, the `router ospfv3` command isnt supported 
+! in the simuation software used to test the these configureations,
+! so for the rest of the lab we will be configureing ipv4 and ipv6
+! OSPF seprately. 
 router ospf 1
     router-id 1.1.1.1
+    redistribute ospf 2 subnets
     
 ipv6 router ospf 1
     router-id 1.1.1.1
+    redistribute ospf 2 subnets
+
+! External OSPF processes
+router ospf 2
+    router-id 1.1.1.1
+    redistribute ospf 1 subnets
+    
+ipv6 router ospf 2
+    router-id 1.1.1.1
+    redistribute ospf 1 subnets

@@ -15,6 +15,13 @@ int fa0/0
     ipv6 ospf 1 area 5
     ip ospf 1 area 5
 
+int fa0/1
+    ip address 10.0.0.2 255.0.0.0
+    ipv6 address 2001:55::1/64
+    ipv6 address FE80::1 link-local
+    no shutdown
+    ipv6 rip RIPPROC1 enable 
+
 int loopback 5
     ip address 192.168.5.1 255.255.255.255
     ipv6 address FE80::1 link-local
@@ -26,7 +33,17 @@ int loopback 5
 router ospf 1
     router-id 55.55.55.55
     area 5 nssa no-summary
+    redistribute rip metric 200 subnets
 
 ipv6 router ospf 1
     router-id 55.55.55.55
     area 5 nssa no-summary
+    redistribute rip RIPPROC1
+
+router rip
+    version 2
+    network 10.0.0.0
+    redistribute ospf 1 metric 1
+
+ipv6 router rip RIPPROC1
+    redistribute ospf 1 metric 1

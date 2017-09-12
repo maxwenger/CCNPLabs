@@ -1,0 +1,38 @@
+! Run the below command and reload before continuing
+! the rest of the configureation
+sdm prefer dual-ipv4-and-ipv6 default
+!
+!
+
+enable
+configure t
+hostname RIPAS
+
+! Must enable routing on the layer 3 switch
+ip routing
+ipv6 unicast-routing
+
+interface lo0
+    shutdown
+    no switchport
+    ip address 192.168.55.1 255.255.255.0
+    ipv6 address FE80::1 link-local
+    ipv6 address 2001:55:55::2/128
+    ipv6 rip RIPPROC1 enable
+    no shutdown
+
+interface f1/0/1
+    shutdown
+    no switchport
+    ip address 10.0.0.2 255.0.0.0
+    ipv6 address FE80::2 link-local
+    ipv6 address 2001:55::2/64
+    ipv6 rip RIPPROC1 enable
+    no shutdown
+
+router rip
+    version 2
+    network 10.0.0.0
+    network 192.168.55.1
+
+ipv6 router rip RIPPROC1
