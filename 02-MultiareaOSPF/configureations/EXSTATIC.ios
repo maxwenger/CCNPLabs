@@ -1,25 +1,19 @@
 enable
 conf t
 
-hostname OSPFAS
+hostname EXSTATIC
 
 int fa0/0
     ip address 10.11.11.2 255.255.255.0
     ipv6 address 2001:11::2/64
     ipv6 address FE80::2 link-local
-    ip ospf 2 area 0
-    ipv6 ospf 2 area 0
     no shutdown
 
 int lo0
     ip address 192.168.11.1 255.255.255.255
-    ipv6 address 2001:11:11::2/128
+    ipv6 address 2001:11:11::1/128
     ipv6 address FE80::1 link-local
-    ip ospf 2 area 0
-    ipv6 ospf 2 area 0
     no shutdown
 
-router ospf 2
-    router-id 2.2.2.2
-ipv6 router ospf 2
-    router-id 2.2.2.2
+ip route 0.0.0.0 0.0.0.0 fa0/0
+ipv6 route ::/0 fa0/0

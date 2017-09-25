@@ -8,14 +8,14 @@ ip routing
 
 ! To backbone
 int fa0/0
-    ip address 10.5.5.5 255.255.255.0
+    ip address 10.5.5.2 255.255.255.0
     ipv6 address FE80::2 link-local
     ipv6 address 2001:5::5/64
     no shutdown
     ipv6 ospf 1 area 0
     ip ospf 1 area 0
 
-! To stub router
+! To Totally NSSrouter
 int fa0/1
     ip address 172.16.5.1 255.255.255.0
     ipv6 address FE80::1 link-local

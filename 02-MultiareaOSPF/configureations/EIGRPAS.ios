@@ -14,11 +14,9 @@ ipv6 unicast-routing
 
 interface lo0
     shutdown
-    no switchport
     ip address 192.168.44.1 255.255.255.255
     ipv6 address FE80::1 link-local
     ipv6 address 2001:44:44::2/128
-    ip eigrp 1
     ipv6 eigrp 1
     no shutdown
 
@@ -28,7 +26,6 @@ interface f1/0/1
     ip address 10.44.44.2 255.255.255.0
     ipv6 address FE80::2 link-local
     ipv6 address 2001:44::2/64
-    ip eigrp 1
     ipv6 eigrp 1
     no shutdown
 

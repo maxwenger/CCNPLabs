@@ -18,7 +18,7 @@ int g0/0
 int g0/1
     ip address 10.44.44.1 255.255.255.0
     ipv6 address FE80::1 link-local
-    ipv6 address 2001:44:44::1/64
+    ipv6 address 2001:44::1/64
     ipv6 eigrp 1
     no shutdown    
 
@@ -38,14 +38,14 @@ router ospf 1
 ipv6 router ospf 1
     router-id 44.44.44.44
     area 4 nssa 
-    redistribute eigrp 1 metric 100 subnets
+    redistribute eigrp 1 metric 100
 
 ! External EIGRP route
-router eirp 1
+router eigrp 1
     eigrp router-id 1.1.1.1
     network 10.44.44.0 0.0.0.255
     redistribute ospf 1
-ipv6 router eirp 1
+ipv6 router eigrp 1
     eigrp router-id 1.1.1.1
     redistribute ospf 1
     no shutdown    

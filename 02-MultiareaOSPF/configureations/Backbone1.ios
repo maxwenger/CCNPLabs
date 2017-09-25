@@ -44,7 +44,7 @@ int range f1/0/2 - 5
     ipv6 ospf 1 area 0
     ip ospf 1 area 0
 
-! Interface to external OSPF process
+! Interface to external static route
 interface f1/0/6
     shutdown
     no switchport
@@ -61,17 +61,11 @@ interface f1/0/6
 ! OSPF seprately. 
 router ospf 1
     router-id 1.1.1.1
-    redistribute ospf 2 subnets
+    redistribute static subnets
     
 ipv6 router ospf 1
     router-id 1.1.1.1
-    redistribute ospf 2 subnets
+    redistribute static
 
-! External OSPF processes
-router ospf 2
-    router-id 1.1.1.1
-    redistribute ospf 1 subnets
-    
-ipv6 router ospf 2
-    router-id 1.1.1.1
-    redistribute ospf 1 subnets
+ip route 192.168.11.1 255.255.255.255 f1/0/6
+ipv6 route 2001:11:11::1/128 f1/0/6

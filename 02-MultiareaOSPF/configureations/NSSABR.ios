@@ -8,7 +8,7 @@ ip routing
 
 ! To backbone
 int g0/0
-    ip address 10.4.4.4 255.255.255.0
+    ip address 10.4.4.2 255.255.255.0
     ipv6 address FE80::2 link-local
     ipv6 address 2001:4::2/64
     no shutdown

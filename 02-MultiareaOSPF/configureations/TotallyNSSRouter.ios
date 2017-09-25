@@ -16,7 +16,7 @@ int fa0/0
     ip ospf 1 area 5
 
 int fa0/1
-    ip address 10.0.0.2 255.0.0.0
+    ip address 10.0.0.1 255.0.0.0
     ipv6 address 2001:55::1/64
     ipv6 address FE80::1 link-local
     no shutdown
